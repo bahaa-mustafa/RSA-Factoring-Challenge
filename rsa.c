@@ -4,9 +4,9 @@
 
 void factor(unsigned long int num)
 {
-	unsigned long int ref = 2, tem1, tem2;
+	unsigned long int ref = 2, tem1;
 
-	while (num && ref <= num)
+	while (ref <= num)
 	{
 		if (num % ref == 0)
 		{
