@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 /**
  * factor - calculate factorize numbers of a large number
@@ -8,17 +9,17 @@
  * Return: no return
  */
 
-void factor(long long int input)
+void factor(unsigned long int input)
 {
-	long long int ref = 2;
-	long long int num;
+	unsigned long int ref = 2;
+	unsigned long int num;
 	while (input)
 	{
 		if (input % ref == 0)
 		{
 			/** our calculate*/
 			num = input / ref;
-			printf("%lld=%lld*%lld\n", input, num, ref);
+			printf("%ld=%ld*%ld\n", input, num, ref);
 			return;
 		}
 		else
@@ -47,26 +48,12 @@ int main(int argc, char *argv[])
 
 	char line[500];
 	char* endptr;
-	int len = 0;
 
 	while (fgets(line, sizeof(line), file) != NULL)
 	{
-		len++;
+		unsigned long int tep = strtoll(line, &endptr, 10);
+		factor(tep);
 	}
 	fclose(file);
-
-	FILE *file1 = fopen(argv[1], "r");
-	long long int num[len];
-
-	int i = 0;
-	while (fgets(line, sizeof(line), file1) != NULL)
-        {
-		long long int tep = strtoll(line, &endptr, 10);
-		num[i] = tep;
-		factor(num[i]);
-		i++;
-        }
-	
-	fclose(file1);
 	return (0);
 }
