@@ -37,7 +37,8 @@ int main(int argc, char* argv[])
 
 	if (fgets(line, sizeof(line), file) != NULL)
 	{
-		num = strtoll(line, NULL, 10);
+		num = atoll(line);
+		
 	}
 	factor(num);
 	fclose(file);
