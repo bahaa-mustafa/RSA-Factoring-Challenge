@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <time.h>
+#include <string.h>
 
 /**
  * factor - calculate factorize numbers of a large number
@@ -13,19 +15,23 @@ void factor(char input[])
 {
 	long long int ref = 2;
 	long long int num;
+	long long int input_num = strtoll(input, NULL, 10);
+	
+	
 	while (input)
 	{
-		if (atoll(input) % ref == 0)
+		if (input_num % (ref) == 0)
 		{
 			/** our calculate*/
-			num = atoll(input) / ref;
-			printf("%lld=%lld*%lld\n", atoll(input),
+			(num) = input_num / (ref);
+			printf("%lld=%lld*%lld\n", input_num,
 					num, ref);
 			return;
 		}
 		else
 			ref++;
 	}
+	/* not use */
 	for (ref = 1; ref <= atoll(input); ref += 2)
 	{
 		if (atoll(input) % (ref > 2 ? ref : 2) == 0)
@@ -43,6 +49,7 @@ void factor(char input[])
 
 int main(int argc, char *argv[])
 {
+	clock_t start_time = clock();
 	if (argc != 2)
 	{
 		printf("Usage: %s failed\n", argv[0]);
@@ -68,9 +75,12 @@ int main(int argc, char *argv[])
 		/*unsigned long int tep = strtoll(line, NULL, 10);
 		factor(tep);
 		*/
-		printf(">>>%s", line);
+		/* printf(">>>%s", line); */
 		factor(line);
 	}
 	fclose(file);
+	/* clock_t end_time = clock();
+	double elapsed_time = (double)(end_time - start_time) / CLOCKS_PER_SEC;
+	printf("Execution time: %.6f seconds\n", elapsed_time); */
 	return (0);
 }
