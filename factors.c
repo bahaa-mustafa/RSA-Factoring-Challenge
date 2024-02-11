@@ -9,22 +9,36 @@
  * Return: no return
  */
 
-void factor(unsigned long int input)
+void factor(char input[])
 {
-	unsigned long int ref = 2;
-	unsigned long int num;
+	long long int ref = 2;
+	long long int num;
 	while (input)
 	{
-		if (input % ref == 0)
+		if (atoll(input) % ref == 0)
 		{
 			/** our calculate*/
-			num = input / ref;
-			printf("%ld=%ld*%ld\n", input, num, ref);
+			num = atoll(input) / ref;
+			printf("%lld=%lld*%lld\n", atoll(input),
+					num, ref);
 			return;
 		}
 		else
 			ref++;
 	}
+	for (ref = 1; ref <= atoll(input); ref += 2)
+	{
+		if (atoll(input) % (ref > 2 ? ref : 2) == 0)
+		{
+			num = atoll(input) / (ref > 2 ? ref : 2);
+			printf("%lld=%lld*%lld\n", atoll(input),
+					num, (ref > 2 ? ref : 2));
+			return;
+		}
+		else
+			;
+	}
+
 }
 
 int main(int argc, char *argv[])
@@ -51,8 +65,11 @@ int main(int argc, char *argv[])
 
 	while (fgets(line, sizeof(line), file) != NULL)
 	{
-		unsigned long int tep = strtoll(line, &endptr, 10);
+		/*unsigned long int tep = strtoll(line, NULL, 10);
 		factor(tep);
+		*/
+		printf(">>>%s", line);
+		factor(line);
 	}
 	fclose(file);
 	return (0);
